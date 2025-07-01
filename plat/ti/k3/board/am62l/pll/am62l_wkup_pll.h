@@ -1,0 +1,21 @@
+/*
+ * Copyright (c) 2025, PHYTEC Messtechnik GmbH
+ * Author: Florijan Plohl <florijan.plohl@norik.com>
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+#ifndef AM62L_WKUP_PLL_H
+#define AM62L_WKUP_PLL_H
+
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_CTRL		0x4040020
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_FREQ_CTRL0		0x4040030
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_FREQ_CTRL1		0x4040034
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_DIV_CTRL		0x4040038
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_SS_CTRL		0x4040040
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL0	0x4040080
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL1	0x4040084
+
+int am62l_wkup_pll_init(void);
+
+#endif /* AM62L_WKUP_PLL_H */
