@@ -7,12 +7,16 @@
 PHYTEC_PLAT_PATH := plat/phytec/am6x
 PLAT_PATH := plat/ti/k3
 TARGET_BOARD	?=	generic
+TI_TARGET_BOARD	?=	am62l
 
 # modify BUILD_PLAT to point to board specific build directory
 BUILD_PLAT := $(abspath ${BUILD_BASE})/${PLAT}/${TARGET_BOARD}/${BUILD_TYPE}
 
 include ${PLAT_PATH}/common/plat_common.mk
 include ${PHYTEC_PLAT_PATH}/board/phyflex-am62l/board.mk
+
+BL31_SOURCES := $(filter-out ${PLAT_PATH}/board/${TARGET_BOARD}/soc.c, $(BL31_SOURCES))
+BL31_SOURCES += ${PLAT_PATH}/board/${TI_TARGET_BOARD}/soc.c
 
 BL32_BASE ?= 0x9e800000
 $(eval $(call add_define,BL32_BASE))
@@ -22,6 +26,9 @@ $(eval $(call add_define,PRELOADED_BL33_BASE))
 
 K3_HW_CONFIG_BASE ?= 0x82000000
 $(eval $(call add_define,K3_HW_CONFIG_BASE))
+
+RAM_SIZE_FIXED ?= 0
+$(eval $(call add_define,RAM_SIZE_FIXED))
 
 PLAT_INCLUDES += -I${PLAT_PATH}/common \
                  -I${PLAT_PATH}/common/drivers \

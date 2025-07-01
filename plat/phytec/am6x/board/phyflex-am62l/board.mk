@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+$(eval $(call add_define,TARGET_BOARD_PHYFLEX_AM62L))
+
 # We dont have system level coherency capability
 USE_COHERENT_MEM	:=	0
 K3_TI_SCI_MAILBOX	:=	1
@@ -60,7 +62,9 @@ PLAT_INCLUDES		+=	\
 				-I${PLAT_PATH}/common/drivers/lpddr4	\
 				-I${PLAT_PATH}/common/drivers/lpddr4/common	\
 				-I${PLAT_PATH}/common/drivers/lpddr4/16bit	\
+				-I${PLAT_PATH}/common/drivers/i2c	\
 				-Iinclude/lib/libfdt	\
+
 
 K3_LPDDR4_SOURCES	+= 	\
 				${PLAT_PATH}/common/drivers/lpddr4/k3-ddrss.c \
@@ -72,12 +76,16 @@ K3_LPDDR4_SOURCES	+= 	\
 
 
 BL1_SOURCES		+=	\
-				${PLAT_PATH}/common/k3_bl1_setup.c	\
+				${PHYTEC_PLAT_PATH}/board/phyflex-am62l/k3_bl1_setup.c	\
 				${PLAT_PATH}/common/k3_helpers.S	\
 				${PLAT_PATH}/common/k3_topology.c	\
 				drivers/io/io_storage.c \
 				${K3_LPDDR4_SOURCES}			\
 				${K3_TI_SCI_TRANSPORT}	\
+				${PLAT_PATH}/common/drivers/i2c/eeprom.c	\
+				${PHYTEC_PLAT_PATH}/board/phyflex-am62l/phyflex_am62l.c	\
+				${PLAT_PATH}/common/drivers/i2c/ti_i2c.c	\
+				${PLAT_PATH}/board/am62l/pll/am62l_wkup_pll.c	\
 
 
 K3_TI_SCI_TRANSPORT    =      ${PLAT_PATH}/common/drivers/mailbox/mailbox.c
@@ -100,6 +108,8 @@ include ${PLAT_PATH}/board/am62l/lpm/lpm.mk
 
 PLAT_INCLUDES += -I${PLAT_PATH}/board/am62l/pm			\
 		 -I${PLAT_PATH}/board/am62l/scmi			\
+		 -I${PLAT_PATH}/board/am62l/pll			\
+		 -I${PHYTEC_PLAT_PATH}/board/phyflex-am62l	\
 
 BL31_SOURCES		+=	\
 				${PLAT_PATH}/common/k3_svc.c		\
