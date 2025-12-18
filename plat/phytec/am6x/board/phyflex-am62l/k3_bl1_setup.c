@@ -21,7 +21,6 @@
 #include <ti_sci_protocol.h>
 
 #include <ti_i2c.h>
-#include <am62l_wkup_pll.h>
 #include "phyflex_am62l.h"
 
 #define ADDR_DOWN(_adr) (_adr & XLAT_ADDR_MASK(2U))
@@ -52,6 +51,9 @@ const mmap_region_t plat_k3_mmap[] = {
 #define FSS_OSPI_OPCODE_EXT_LOWER_REG (0xE0)
 
 #define BACKUP_BOOT_MODE_FS			BIT(13)
+
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL0 0x4040080
+#define AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL1 0x4040084
 
 meminfo_t *bl1_plat_sec_mem_layout(void)
 {
@@ -91,7 +93,8 @@ void bl1_early_platform_setup(void)
 	mmio_write_32(MAIN_PLL_MMR_BASE + MAIN_PLL_MMR_CFG_PLL8_HSDIV_CTRL0, 0x8001);
 
 	/* Initialize WKUP PLL */
-	am62l_wkup_pll_init();
+	mmio_write_32(AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL0, 0x8005);
+	mmio_write_32(AM62L_WKUP_PLL_MMR_CFG_PLL0_HSDIV_CTRL1, 0x8018);
 	/* Initialize I2C */
 	ti_i2c_init(i2c_bus);
 }

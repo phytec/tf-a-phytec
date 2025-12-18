@@ -85,7 +85,6 @@ BL1_SOURCES		+=	\
 				${PLAT_PATH}/common/drivers/i2c/eeprom.c	\
 				${PHYTEC_PLAT_PATH}/board/phyflex-am62l/phyflex_am62l.c	\
 				${PLAT_PATH}/common/drivers/i2c/ti_i2c.c	\
-				${PLAT_PATH}/board/am62l/pll/am62l_wkup_pll.c	\
 
 
 K3_TI_SCI_TRANSPORT    =      ${PLAT_PATH}/common/drivers/mailbox/mailbox.c
@@ -108,7 +107,6 @@ include ${PLAT_PATH}/board/am62l/lpm/lpm.mk
 
 PLAT_INCLUDES += -I${PLAT_PATH}/board/am62l/pm			\
 		 -I${PLAT_PATH}/board/am62l/scmi			\
-		 -I${PLAT_PATH}/board/am62l/pll			\
 		 -I${PHYTEC_PLAT_PATH}/board/phyflex-am62l	\
 
 BL31_SOURCES		+=	\

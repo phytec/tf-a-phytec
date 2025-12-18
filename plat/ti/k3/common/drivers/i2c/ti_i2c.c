@@ -13,7 +13,6 @@
 #include <drivers/delay_timer.h>
 
 #include "ti_i2c.h"
-#include "am62l_wkup_pll.h"
 
 #define I2C_TX_MODE 1
 #define I2C_RX_MODE 0
